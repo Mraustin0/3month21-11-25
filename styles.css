@@ -254,53 +254,6 @@ button.ghost:hover {
   background: rgba(249, 213, 229, 0.4);
 }
 
-.media-controls {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.5rem;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
-}
-
-.media-card:hover .media-controls,
-.media-card:focus-within .media-controls {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.media-btn {
-  appearance: none;
-  -webkit-appearance: none;
-  border: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  background: rgba(47, 42, 45, 0.38);
-  box-shadow: 0 6px 20px rgba(44, 28, 39, 0.18);
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.media-btn:hover {
-  transform: scale(1.06);
-  background: rgba(47, 42, 45, 0.5);
-}
-
-.media-btn.prev {
-  margin-left: 0.25rem;
-}
-
-.media-btn.next {
-  margin-right: 0.25rem;
-}
-
 .media-card figcaption {
   margin: 0;
   padding: 1.5rem 2rem;
