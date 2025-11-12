@@ -1,0 +1,4 @@
+assests/.mp4 filter=lfs diff=lfs merge=lfs -text
+assests/.webm filter=lfs diff=lfs merge=lfs -text
+assests/our-flower-memory.mp4 filter=lfs diff=lfs merge=lfs -text
+assests/our-flower-memory.mp4 !text !filter !merge !diff
