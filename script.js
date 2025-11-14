@@ -159,6 +159,27 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(section);
   });
   
+  // Auto-play video when it comes into view
+  const video = document.querySelector('.media');
+  if (video) {
+    // Try to play immediately
+    video.play().catch(() => {
+      // If autoplay fails, play when video is visible
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {
+              // User interaction may be required
+              console.log('Video autoplay requires user interaction');
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      videoObserver.observe(video);
+    });
+  }
+  
   // Typewriter effect for hero title (optional - can be enabled)
   // const heroTitle = document.querySelector('.hero-content h1');
   // if (heroTitle) {
