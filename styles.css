@@ -84,6 +84,114 @@ body {
   }
 }
 
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  top: -10px;
+  z-index: 9999;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Heart Particles */
+.heart-particle {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 9998;
+  animation: heartFloat 2s ease-out forwards;
+}
+
+@keyframes heartFloat {
+  to {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.5);
+  }
+}
+
+/* Sparkle Effect */
+.sparkle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  box-shadow: 
+    0 0 6px rgba(232, 164, 194, 0.8),
+    0 0 12px rgba(232, 164, 194, 0.6),
+    0 0 18px rgba(232, 164, 194, 0.4);
+  animation: sparkleAnim 1s ease-out forwards;
+}
+
+@keyframes sparkleAnim {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Cursor Trail */
+.cursor-trail {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(232, 164, 194, 0.6), transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9996;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+/* Ripple Effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: rippleAnim 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleAnim {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #ffb6c1);
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 2px 8px rgba(232, 164, 194, 0.4);
+}
+
 /* Hero Section */
 .hero {
   position: relative;
@@ -119,6 +227,13 @@ body {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-size: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.nav-title:hover {
+  transform: scale(1.1);
 }
 
 .nav-link {
@@ -154,6 +269,8 @@ body {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out 0.5s forwards;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
 }
 
 .eyebrow {
@@ -252,6 +369,24 @@ h1 {
   transform: scale(1.02);
 }
 
+.media-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(232, 164, 194, 0.1) 0%, 
+    transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 24px;
+}
+
+.media-card:hover::before {
+  opacity: 1;
+}
+
 /* Finale Section */
 .finale {
   padding: 10rem 1.5rem;
@@ -308,6 +443,27 @@ button.primary {
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px);
+}
+
+button.primary::after {
+  content: '💕';
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+button.primary:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+  animation: heartBeat 0.6s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: translateY(-50%) scale(1.2); }
+  50% { transform: translateY(-50%) scale(1.4); }
 }
 
 .finale.visible button.primary {
