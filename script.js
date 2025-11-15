@@ -159,6 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(section);
   });
   
+  // Initialize video playlist
+  initVideoPlaylist();
+  
   // Auto-play video when it comes into view
   const video = document.querySelector('.media');
   if (video) {
@@ -287,6 +290,90 @@ window.addEventListener('scroll', () => {
   }
   lastScroll = scroll;
 });
+
+// Video playlist functionality
+function initVideoPlaylist() {
+  const mediaCard = document.querySelector('.media-card');
+  const video = document.querySelector('.media');
+  const prevBtn = document.querySelector('.video-nav.prev');
+  const nextBtn = document.querySelector('.video-nav.next');
+  const videoCounter = document.querySelector('.video-counter');
+  const currentVideoSpan = document.querySelector('.current-video');
+  const totalVideosSpan = document.querySelector('.total-videos');
+  
+  if (!mediaCard || !video) return;
+  
+  // Get playlist from data attribute or use single video
+  const playlistStr = mediaCard.getAttribute('data-playlist');
+  let playlist = [];
+  
+  if (playlistStr && playlistStr.includes(',')) {
+    playlist = playlistStr.split(',').map(v => v.trim());
+  } else {
+    // Single video - hide navigation
+    if (prevBtn) prevBtn.style.display = 'none';
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (videoCounter) videoCounter.style.display = 'none';
+    return;
+  }
+  
+  let currentIndex = 0;
+  
+  // Show navigation if multiple videos
+  if (playlist.length > 1) {
+    if (prevBtn) prevBtn.style.display = 'flex';
+    if (nextBtn) nextBtn.style.display = 'flex';
+    if (videoCounter) {
+      videoCounter.style.display = 'block';
+      videoCounter.classList.add('visible');
+    }
+    if (totalVideosSpan) totalVideosSpan.textContent = playlist.length;
+  }
+  
+  function loadVideo(index) {
+    if (index < 0 || index >= playlist.length) return;
+    
+    currentIndex = index;
+    const videoSrc = playlist[index];
+    const videoElement = video;
+    
+    // Update video source
+    videoElement.src = videoSrc;
+    videoElement.load();
+    
+    // Try to play
+    videoElement.play().catch(() => {
+      // Autoplay might be blocked
+    });
+    
+    // Update counter
+    if (currentVideoSpan) currentVideoSpan.textContent = index + 1;
+    
+    // Update button states
+    if (prevBtn) prevBtn.style.opacity = index === 0 ? '0.5' : '1';
+    if (nextBtn) nextBtn.style.opacity = index === playlist.length - 1 ? '0.5' : '1';
+  }
+  
+  // Navigation handlers
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentIndex > 0) {
+      loadVideo(currentIndex - 1);
+    }
+  });
+  
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentIndex < playlist.length - 1) {
+      loadVideo(currentIndex + 1);
+    }
+  });
+  
+  // Initialize with first video
+  if (playlist.length > 0) {
+    loadVideo(0);
+  }
+}
 
 // Add sparkles on video hover and track mouse for glow effect
 const videoCard = document.querySelector('.media-card');

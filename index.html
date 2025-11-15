@@ -33,7 +33,7 @@
     <main>
       <section id="chapters" class="section photo-feature">
         <h2>Moments in Bloom</h2>
-        <figure class="media-card">
+        <figure class="media-card" data-playlist="assests/our-flower-memory.mp4">
           <video
             class="media"
             controls
@@ -48,7 +48,12 @@
             <source src="assests/our-flower-memory.webm" type="video/webm" />
             Your browser does not support the video tag.
           </video>
+          <button class="video-nav prev" aria-label="Previous video" style="display: none;">‹</button>
+          <button class="video-nav next" aria-label="Next video" style="display: none;">›</button>
         </figure>
+        <p class="video-counter" style="display: none;">
+          <span class="current-video">1</span> / <span class="total-videos">1</span>
+        </p>
       </section>
 
       <section id="dear-us" class="section finale">

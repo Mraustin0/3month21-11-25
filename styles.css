@@ -387,6 +387,67 @@ h1 {
   opacity: 1;
 }
 
+/* Video Navigation Buttons */
+.video-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 2rem;
+  color: var(--accent);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.media-card:hover .video-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-nav.prev {
+  left: 1rem;
+}
+
+.video-nav.next {
+  right: 1rem;
+}
+
+.video-nav:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(232, 164, 194, 0.4);
+}
+
+.video-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Video Counter */
+.video-counter {
+  margin-top: 1rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  font-weight: 300;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-counter.visible {
+  opacity: 1;
+}
+
 /* Finale Section */
 .finale {
   padding: 10rem 1.5rem;
